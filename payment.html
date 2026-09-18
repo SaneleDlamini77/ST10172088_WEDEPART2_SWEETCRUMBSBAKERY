@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Checkout - Sweet Crumbs Bakery</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        /* ===================== VARIABLES & RESET ===================== */
+        :root {
+            --primary: #8B4513;
+            --primary-light: #A0522D;
+            --secondary: #FFD700;
+            --accent: #FF6B6B;
+            --light: #FFF8F0;
+            --dark: #5D4037;
+            --text: #4A3428;
+            --shadow: 0 5px 15px rgba(139, 69, 19, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* ===================== TYPOGRAPHY ===================== */
+        h1, h2, h3, h4 {
+            font-family: 'Georgia', serif;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            font-size: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: var(--primary-light);
+        }
+
+        p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        /* ===================== LAYOUT & CONTAINERS ===================== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 2rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        /* ===================== HEADER & NAVIGATION ===================== */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+
+        header h1, header p {
+            position: relative;
+            z-index: 1;
+        }
+
+        nav {
+            background: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover:after {
+            width: 80%;
+        }
+
+        .nav-links a.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ===================== BUTTONS ===================== */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+        }
+
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(139, 69, 19, 0.4);
+        }
+
+        .btn:hover:before {
+            left: 100%;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary) 0%, #FFEC8B 100%);
+            color: var(--dark);
+        }
+
+        .btn-accent {
+            background: linear-gradient(135deg, var(--accent) 0%, #FF9E9E 100%);
+        }
+
+        .btn-large {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* ===================== CHECKOUT STYLES ===================== */
+        .checkout-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .checkout-section {
+            margin-bottom: 2.5rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #f0e6d6;
+        }
+
+        .checkout-section:last-child {
+            border-bottom: none;
+        }
+
+        .checkout-section h2 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1rem;
+        }
+
+        input[type="text"], input[type="tel"], input[type="email"], textarea, select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #E8D0B3;
+            border-radius: 10px;
+            background-color: white;
+            font-size: 1rem;
+            color: var(--text);
+            transition: var(--transition);
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.2);
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .radio-option input[type="radio"] {
+            width: auto;
+        }
+
+        #order-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        #order-list li {
+            padding: 1rem;
+            border-bottom: 1px solid #f0e6d6;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #order-list li:last-child {
+            border-bottom: none;
+        }
+
+        #bank-details {
+            display: none;
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: #f9f5f0;
+            border-radius: 10px;
+        }
+
+        /* ===================== FOOTER ===================== */
+        footer {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .footer-links a {
+            color: #E8D0B3;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .copyright {
+            margin-top: 1.5rem;
+            color: #E8D0B3;
+            font-size: 0.9rem;
+        }
+
+        /* ===================== RESPONSIVE DESIGN ===================== */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                padding: 1rem 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 0;
+                text-align: center;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 1rem;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.7rem;
+            }
+
+            .checkout-container {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 2rem 1rem;
+            }
+
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .btn {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+<link href="shared-theme.css" rel="stylesheet"/></head>
+<body>
+<!-- ===================== HEADER ===================== -->
+<header>
+<h1>Sweet Crumbs Bakery</h1>
+<p>Secure Checkout</p>
+</header>
+<!-- ===================== NAVIGATION ===================== -->
+<nav aria-label="Main Navigation">
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="menu.html">Menu</a></li>
+<li><a href="gallery.html">Gallery</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="contact.html">Contact</a></li>
+<li><a class="order-link" href="menu.html#order">Order Now</a></li>
+</ul>
+</nav>
+<!-- ===================== CHECKOUT CONTENT ===================== -->
+<main>
+<div class="container">
+<div class="checkout-container">
+<div class="section-header">
+<h1>Complete Your Order</h1>
+<p>Review your items and complete your purchase</p>
+</div>
+<!-- Order Summary Section -->
+<section class="checkout-section">
+<h2>Your Order</h2>
+<ul id="order-list"></ul>
+<p><strong>Total: R<span id="order-total">0</span></strong></p>
+</section>
+<!-- Delivery or Pickup Section -->
+<section class="checkout-section">
+<h2>Delivery / Pickup</h2>
+<div class="radio-group">
+<label class="radio-option">
+<input checked="" name="delivery" type="radio" value="pickup"/>
+<span>Pickup (Pay on collection)</span>
+</label>
+<label class="radio-option">
+<input name="delivery" type="radio" value="delivery"/>
+<span>Delivery (+R25)</span>
+</label>
+</div>
+<div class="form-group" id="address-section" style="display: none; margin-top: 1rem;">
+<label for="address">Address (required for delivery):</label>
+<textarea id="address" rows="3"></textarea>
+</div>
+</section>
+<!-- Customer Details Section -->
+<section class="checkout-section">
+<h2>Customer Details</h2>
+<div class="form-group">
+<label for="name">Full Name:</label>
+<input id="name" required="" type="text"/>
+</div>
+<div class="form-group">
+<label for="phone">Phone Number:</label>
+<input id="phone" required="" type="tel"/>
+</div>
+<div class="form-group">
+<label for="email">Email Address:</label>
+<input id="email" type="email"/>
+</div>
+</section>
+<!-- Payment Options Section -->
+<section class="checkout-section">
+<h2>Payment Method</h2>
+<div class="radio-group">
+<label class="radio-option">
+<input checked="" name="payment" type="radio" value="card"/>
+<span>Credit / Debit Card</span>
+</label>
+<label class="radio-option">
+<input name="payment" type="radio" value="eft"/>
+<span>EFT (Bank Transfer)</span>
+</label>
+<label class="radio-option">
+<input name="payment" type="radio" value="cash"/>
+<span>Cash on Delivery / Pickup</span>
+</label>
+</div>
+<div id="bank-details">
+<h3>Banking Details</h3>
+<div class="form-group">
+<label for="bank-name">Bank Name:</label>
+<input id="bank-name" type="text"/>
+</div>
+<div class="form-group">
+<label for="account-number">Account Number:</label>
+<input id="account-number" type="text"/>
+</div>
+<div class="form-group">
+<label for="branch-code">Branch Code:</label>
+<input id="branch-code" type="text"/>
+</div>
+</div>
+</section>
+<!-- Confirm Order Button -->
+<section style="text-align: center;">
+<button class="btn btn-large" onclick="confirmPayment()" type="button">Confirm &amp; Pay</button>
+<p style="margin-top: 1rem; color: #666; font-size: 0.9rem;">
+                        By placing your order, you agree to our terms and conditions
+                    </p>
+</section>
+</div>
+</div>
+</main>
+<!-- ===================== FOOTER ===================== -->
+<footer>
+<div class="footer-content">
+<div class="logo" style="color: white; justify-content: center; margin-bottom: 1rem;">
+<i class="fas fa-bread-slice"></i>
+                Sweet Crumbs Bakery
+            </div>
+<p>Freshly baked goods made with love and the finest ingredients</p>
+<div class="footer-links">
+<a href="index.html">Home</a>
+<a href="menu.html">Menu</a>
+<a href="gallery.html">Gallery</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a>
+<a href="#">Privacy Policy</a>
+<a href="#">Terms of Service</a>
+</div>
+<div class="copyright">
+                © 2026 Sweet Crumbs Bakery. All rights reserved.
+            </div>
+</div>
+</footer>
+<!-- ===================== JAVASCRIPT ===================== -->
+<script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+
+        // Get cart items from localStorage
+        const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+        const orderList = document.getElementById("order-list");
+        const orderTotalEl = document.getElementById("order-total");
+        const addressSection = document.getElementById("address-section");
+        const bankDetails = document.getElementById("bank-details");
+
+        // Render cart items
+        function renderCart() {
+            orderList.innerHTML = "";
+            let total = 0;
+
+            if (cartItems.length === 0) {
+                orderList.innerHTML = "<li style='text-align: center; color: #666; padding: 2rem;'>No items in cart. <a href='menu.html'>Browse our menu</a></li>";
+            } else {
+                cartItems.forEach(item => {
+                    const subtotal = item.price * item.quantity;
+                    total += subtotal;
+                    orderList.innerHTML += `
+                        <li style="display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid #f0e6d6;">
+                            <span>${item.name} x${item.quantity}</span>
+                            <span>R${subtotal}</span>
+                        </li>
+                    `;
+                });
+            }
+
+            // Add delivery fee if delivery option is selected
+            const deliveryType = document.querySelector('input[name="delivery"]:checked').value;
+            if (deliveryType === "delivery") total += 25;
+
+            orderTotalEl.innerText = total;
+        }
+
+        // Initial render
+        renderCart();
+
+        // Toggle address section based on delivery option
+        document.querySelectorAll('input[name="delivery"]').forEach(el => {
+            el.addEventListener("change", function() {
+                addressSection.style.display = this.value === "delivery" ? "block" : "none";
+                renderCart();
+            });
+        });
+
+        // Toggle bank details based on payment method
+        document.querySelectorAll('input[name="payment"]').forEach(el => {
+            el.addEventListener("change", function() {
+                bankDetails.style.display = (this.value === "eft" || this.value === "card") ? "block" : "none";
+            });
+        });
+
+        // Confirm payment function
+        function confirmPayment() {
+            const name = document.getElementById("name").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const deliveryType = document.querySelector('input[name="delivery"]:checked').value;
+            const address = document.getElementById("address").value.trim();
+            const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+            const bankName = document.getElementById("bank-name").value.trim();
+            const accountNumber = document.getElementById("account-number").value.trim();
+            const branchCode = document.getElementById("branch-code").value.trim();
+
+            // Validation
+            if (!name || !phone) {
+                alert("Please fill in your name and phone number.");
+                return;
+            }
+
+            if (deliveryType === "delivery" && !address) {
+                alert("Please provide a delivery address.");
+                return;
+            }
+
+            if ((paymentMethod === "eft" || paymentMethod === "card") && (!bankName || !accountNumber || !branchCode)) {
+                alert("Please complete all banking details for your selected payment method.");
+                return;
+            }
+
+            if (cartItems.length === 0) {
+                alert("Your cart is empty. Please add items before checking out.");
+                return;
+            }
+
+            // Save order details
+            localStorage.setItem("orderConfirmed", JSON.stringify({
+                cartItems,
+                deliveryType,
+                address,
+                name,
+                phone,
+                email,
+                paymentMethod,
+                bankDetails: { bankName, accountNumber, branchCode },
+                total: orderTotalEl.innerText
+            }));
+
+            // Show confirmation and redirect
+            alert(`Order confirmed! Thank you, ${name}. Your total is R${orderTotalEl.innerText}. We'll contact you at ${phone} to confirm.`);
+            
+            // Clear cart
+            localStorage.removeItem("cartItems");
+            
+            // Redirect to thank you page (you can create this page)
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>

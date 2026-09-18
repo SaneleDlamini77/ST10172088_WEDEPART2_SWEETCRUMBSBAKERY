@@ -1,0 +1,115 @@
+/* Shared Sweet Crumbs theme - matched to the Home page */
+:root {
+  --primary: #8B4513;
+  --primary-light: #A0522D;
+  --secondary: #FFD700;
+  --accent: #FF6B6B;
+  --light: #FFF8F0;
+  --dark: #5D4037;
+  --text: #4A3428;
+  --shadow: 0 5px 15px rgba(139, 69, 19, 0.12);
+  --transition: all .3s ease;
+}
+* { box-sizing: border-box; }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+  line-height: 1.6;
+  color: var(--text) !important;
+  background: var(--light) !important;
+  margin: 0;
+}
+h1,h2,h3,h4 { font-family: Georgia, serif; color: var(--primary) !important; }
+a { color: var(--primary); }
+.container { max-width: 1200px; margin: 0 auto; padding-left: 20px; padding-right: 20px; }
+
+/* One navigation design on every page */
+nav {
+  background: #fff !important;
+  box-shadow: var(--shadow) !important;
+  position: sticky !important;
+  top: 0;
+  z-index: 1000;
+  padding: 0 !important;
+}
+nav .nav-container, nav .nav-inner, nav > ul {
+  max-width: 1200px;
+  margin: 0 auto !important;
+}
+nav > ul, nav .nav-links {
+  min-height: 72px;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-wrap: wrap;
+  gap: .35rem;
+  list-style: none;
+  padding: .7rem 20px !important;
+}
+nav li { margin: 0 !important; }
+nav a, nav .nav-links a {
+  display: inline-block;
+  color: var(--dark) !important;
+  text-decoration: none;
+  font-weight: 600 !important;
+  padding: .55rem 1rem !important;
+  border-radius: 25px !important;
+  background: transparent !important;
+  transition: var(--transition);
+}
+nav a:hover, nav a:focus, nav a.active {
+  background: var(--primary) !important;
+  color: #fff !important;
+  transform: none !important;
+}
+nav a.order-link {
+  background: linear-gradient(135deg, var(--secondary), #FFEC8B) !important;
+  color: var(--dark) !important;
+}
+nav a.order-link:hover { background: var(--primary) !important; color:#fff !important; }
+nav .logo { color: var(--primary) !important; }
+
+/* Page surfaces */
+header {
+  background: linear-gradient(135deg, var(--primary), var(--primary-light)) !important;
+  color: white !important;
+  text-align: center;
+}
+header h1, header p { color: white !important; }
+section, main { color: var(--text); }
+.menu-container > div, .gallery-item, .contact-form, .checkout-container, .about-card, .info-card {
+  background: #fff !important;
+  box-shadow: var(--shadow) !important;
+  border-radius: 15px !important;
+}
+button, .btn, #add-to-cart, #checkout-btn {
+  background: linear-gradient(135deg, var(--primary), var(--primary-light)) !important;
+  color: #fff !important;
+  border: 0 !important;
+  border-radius: 30px !important;
+  font-weight: 600 !important;
+}
+button:hover, .btn:hover, #add-to-cart:hover, #checkout-btn:hover { filter: brightness(1.08); }
+input,select,textarea { border-color: #E8D0B3 !important; }
+footer {
+  background: var(--dark) !important;
+  color: white !important;
+  border: 0 !important;
+}
+footer a { color: var(--secondary) !important; }
+
+/* Contact page after moving business information to About */
+.contact-container { grid-template-columns: minmax(0, 760px) !important; justify-content: center; }
+.contact-form { width: 100%; }
+
+/* About page */
+.about-page { max-width: 1100px; margin: 0 auto; padding: 4rem 20px; }
+.about-page .page-intro { text-align:center; max-width:800px; margin:0 auto 2.5rem; }
+.about-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem; }
+.about-card, .info-card { padding:1.7rem; }
+.contact-details { margin-top:2.2rem; }
+.contact-details .info-card p { margin:.55rem 0; }
+
+@media (max-width: 760px) {
+  nav > ul, nav .nav-links { flex-direction: column !important; padding: .75rem 16px !important; }
+  nav { position: static !important; }
+}

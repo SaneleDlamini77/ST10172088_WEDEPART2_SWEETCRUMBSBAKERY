@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Sweet Crumbs Bakery - Menu &amp; Order</title>
+<style>
+/* ===================== RESET & BASE STYLES ===================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f5f0;
+}
+
+/* ===================== NAVIGATION ===================== */
+nav {
+    background-color: #8b4513;
+    padding: 1rem 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    flex-wrap: wrap;
+}
+
+nav li {
+    margin: 0 1rem;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: #a0522d;
+}
+
+/* ===================== SECTIONS ===================== */
+section {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1, h2 {
+    color: #8b4513;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+    border-bottom: 2px solid #d2b48c;
+    padding-bottom: 0.5rem;
+}
+
+/* ===================== MENU SECTION ===================== */
+#menu p {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    color: #666;
+}
+
+.menu-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.menu-container > div {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.menu-container > div:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.menu-container h3 {
+    color: #8b4513;
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+}
+
+.menu-container p:last-of-type {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #a0522d;
+    margin-top: 0.5rem;
+}
+
+/* ===================== ORDER SECTION ===================== */
+#order {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    margin-top: 2rem;
+}
+
+.order-form {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 1rem;
+    align-items: end;
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #8b4513;
+}
+
+/* Improved dropdown styling */
+select {
+    padding: 0.75rem;
+    border: 1px solid #d2b48c;
+    border-radius: 4px;
+    background-color: white;
+    font-size: 1rem;
+    color: #333;
+    cursor: pointer;
+    appearance: menulist; /* Ensures native dropdown appearance */
+    -webkit-appearance: menulist; /* For Safari */
+    -moz-appearance: menulist; /* For Firefox */
+}
+
+select:focus {
+    outline: none;
+    border-color: #8b4513;
+    box-shadow: 0 0 0 2px rgba(139, 69, 19, 0.2);
+}
+
+/* Quantity input */
+input[type="number"] {
+    padding: 0.75rem;
+    border: 1px solid #d2b48c;
+    border-radius: 4px;
+    font-size: 1rem;
+    width: 100px;
+}
+
+input[type="number"]:focus {
+    outline: none;
+    border-color: #8b4513;
+    box-shadow: 0 0 0 2px rgba(139, 69, 19, 0.2);
+}
+
+/* Buttons */
+button {
+    padding: 0.75rem 1.5rem;
+    background-color: #8b4513;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #a0522d;
+}
+
+#checkout-btn {
+    background-color: #2e8b57;
+    margin-top: 1rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#checkout-btn:hover {
+    background-color: #3cb371;
+}
+
+.remove-btn {
+    background-color: #dc3545;
+    padding: 0.5rem;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.remove-btn:hover {
+    background-color: #c82333;
+}
+
+/* ===================== CART TABLE ===================== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #8b4513;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f5f0;
+}
+
+#cart-total {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: right;
+    margin-top: 1rem;
+    color: #8b4513;
+}
+
+/* ===================== RESPONSIVE DESIGN ===================== */
+@media (max-width: 768px) {
+    .order-form {
+        grid-template-columns: 1fr;
+    }
+    
+    .menu-container {
+        grid-template-columns: 1fr;
+    }
+    
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    nav li {
+        margin: 0.5rem 0;
+    }
+    
+    table {
+        font-size: 0.9rem;
+    }
+    
+    th, td {
+        padding: 0.5rem;
+    }
+}
+</style>
+<link href="shared-theme.css" rel="stylesheet"/></head>
+<body>
+<!-- ===================== Navigation ===================== -->
+<nav aria-label="Main Navigation">
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a class="active" href="menu.html">Menu</a></li>
+<li><a href="gallery.html">Gallery</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="contact.html">Contact</a></li>
+<li><a class="order-link" href="menu.html#order">Order Now</a></li>
+</ul>
+</nav>
+<!-- ===================== MENU SECTION ===================== -->
+<section aria-label="Bakery Menu" id="menu">
+<h1>Sweet Crumbs Bakery Menu</h1>
+<p>All our cakes are freshly baked with premium ingredients and lots of love.</p>
+<div class="menu-container">
+<div><h3>Chocolate Fudge Cake</h3><p>Rich chocolate cake with fudge icing</p><p>R250</p></div>
+<div><h3>Red Velvet Cake</h3><p>Classic red velvet with cream cheese frosting</p><p>R280</p></div>
+<div><h3>Carrot Cake</h3><p>Moist carrot cake with walnuts</p><p>R240</p></div>
+<div><h3>Vanilla Buttercream Cake</h3><p>Classic vanilla cake with smooth buttercream</p><p>R220</p></div>
+<div><h3>Black Forest Cake</h3><p>Chocolate cake with cherries and cream</p><p>R300</p></div>
+<div><h3>Lemon Drizzle Cake</h3><p>Zesty lemon sponge with sweet drizzle</p><p>R200</p></div>
+<div><h3>Coconut Cream Cake</h3><p>Soft cake with coconut cream layers</p><p>R240</p></div>
+<div><h3>Tiramisu Cake</h3><p>Coffee-flavored Italian classic</p><p>R320</p></div>
+<div><h3>Classic Cheesecake</h3><p>Creamy cheesecake with biscuit base</p><p>R280</p></div>
+<div><h3>Oreo Cake</h3><p>Cookies and cream layered cake</p><p>R260</p></div>
+<div><h3>Nutella Hazelnut Cake</h3><p>Nutella and hazelnut delight</p><p>R310</p></div>
+<div><h3>Strawberry Shortcake</h3><p>Light sponge with strawberries</p><p>R290</p></div>
+<div><h3>Banana Cake</h3><p>Fresh banana flavor</p><p>R210</p></div>
+<div><h3>Marble Cake</h3><p>Chocolate and vanilla swirls</p><p>R220</p></div>
+<div><h3>Rainbow Cake</h3><p>Colorful layered cake</p><p>R350</p></div>
+<div><h3>Ferrero Rocher Cake</h3><p>Hazelnut chocolate luxury</p><p>R370</p></div>
+<div><h3>Mocha Coffee Cake</h3><p>Chocolate &amp; coffee blend</p><p>R280</p></div>
+<div><h3>Pineapple Cream Cake</h3><p>Sweet pineapple filling</p><p>R230</p></div>
+<div><h3>Almond Cake</h3><p>Nutty almond sponge</p><p>R240</p></div>
+<div><h3>Mint Chocolate Cake</h3><p>Cool mint &amp; chocolate</p><p>R260</p></div>
+</div>
+</section>
+<!-- ===================== ORDER SECTION ===================== -->
+<section aria-label="Order Cakes Online" id="order">
+<h2>Order Online</h2>
+<div class="order-form">
+<!-- Dropdown menu -->
+<div class="form-group">
+<label for="items">Select Item</label>
+<select aria-label="Select cake to order" id="items">
+<option disabled="" selected="">-- Choose an item --</option>
+<option data-price="250" value="Chocolate Fudge Cake">Chocolate Fudge Cake - R250</option>
+<option data-price="280" value="Red Velvet Cake">Red Velvet Cake - R280</option>
+<option data-price="240" value="Carrot Cake">Carrot Cake - R240</option>
+<option data-price="220" value="Vanilla Buttercream Cake">Vanilla Buttercream Cake - R220</option>
+<option data-price="300" value="Black Forest Cake">Black Forest Cake - R300</option>
+<option data-price="200" value="Lemon Drizzle Cake">Lemon Drizzle Cake - R200</option>
+<option data-price="240" value="Coconut Cream Cake">Coconut Cream Cake - R240</option>
+<option data-price="320" value="Tiramisu Cake">Tiramisu Cake - R320</option>
+<option data-price="280" value="Classic Cheesecake">Classic Cheesecake - R280</option>
+<option data-price="260" value="Oreo Cake">Oreo Cake - R260</option>
+<option data-price="310" value="Nutella Hazelnut Cake">Nutella Hazelnut Cake - R310</option>
+<option data-price="290" value="Strawberry Shortcake">Strawberry Shortcake - R290</option>
+<option data-price="210" value="Banana Cake">Banana Cake - R210</option>
+<option data-price="220" value="Marble Cake">Marble Cake - R220</option>
+<option data-price="350" value="Rainbow Cake">Rainbow Cake - R350</option>
+<option data-price="370" value="Ferrero Rocher Cake">Ferrero Rocher Cake - R370</option>
+<option data-price="280" value="Mocha Coffee Cake">Mocha Coffee Cake - R280</option>
+<option data-price="230" value="Pineapple Cream Cake">Pineapple Cream Cake - R230</option>
+<option data-price="240" value="Almond Cake">Almond Cake - R240</option>
+<option data-price="260" value="Mint Chocolate Cake">Mint Chocolate Cake - R260</option>
+</select>
+</div>
+<!-- Quantity -->
+<div class="form-group">
+<label for="quantity">Quantity</label>
+<input id="quantity" min="1" type="number" value="1"/>
+</div>
+<!-- Add to cart -->
+<button id="add-to-cart">Add to Cart</button>
+</div>
+<!-- Cart Table -->
+<table aria-label="Shopping Cart" id="cart">
+<thead>
+<tr>
+<th>Item</th>
+<th>Qty</th>
+<th>Price (each)</th>
+<th>Total</th>
+<th>Remove</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<!-- Total -->
+<p id="cart-total">Total: R0</p>
+<!-- Checkout -->
+<button id="checkout-btn" onclick="location.href='payment.html'" style="display:none;">
+        Checkout
+    </button>
+</section>
+<!-- ===================== JAVASCRIPT ===================== -->
+<script>
+const itemsSelect = document.getElementById('items');
+const quantityInput = document.getElementById('quantity');
+const addToCartBtn = document.getElementById('add-to-cart');
+const cartTableBody = document.querySelector('#cart tbody');
+const cartTotal = document.getElementById('cart-total');
+const checkoutBtn = document.getElementById('checkout-btn');
+
+let cart = [];
+
+// Render cart contents
+function renderCart() {
+    cartTableBody.innerHTML = '';
+    let totalCost = 0;
+
+    cart.forEach((item, index) => {
+        const row = document.createElement('tr');
+
+        row.innerHTML = `
+            <td>${item.name}</td>
+            <td>${item.quantity}</td>
+            <td>R${item.price}</td>
+            <td>R${item.price * item.quantity}</td>
+            <td><button class="remove-btn" aria-label="Remove ${item.name}">✕</button></td>
+        `;
+
+        // Remove button
+        row.querySelector('.remove-btn').addEventListener('click', () => {
+            cart.splice(index, 1);
+            renderCart();
+        });
+
+        cartTableBody.appendChild(row);
+        totalCost += item.price * item.quantity;
+    });
+
+    cartTotal.textContent = `Total: R${totalCost}`;
+    checkoutBtn.style.display = cart.length > 0 ? 'inline-block' : 'none';
+}
+
+// Add to cart
+addToCartBtn.addEventListener('click', () => {
+    const selected = itemsSelect.selectedOptions[0];
+
+    if (!selected || selected.disabled) {
+        alert("Please select an item.");
+        return;
+    }
+
+    const name = selected.value;
+    const price = Number(selected.dataset.price);
+    const qty = Number(quantityInput.value);
+
+    if (qty < 1) {
+        alert("Enter a valid quantity.");
+        return;
+    }
+
+    const existing = cart.find(item => item.name === name);
+
+    if (existing) {
+        existing.quantity += qty;
+    } else {
+        cart.push({ name, price, quantity: qty });
+    }
+
+    renderCart();
+    quantityInput.value = 1;
+});
+
+// Initial render
+renderCart();
+</script>
+</body>
+</html>
