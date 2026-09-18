@@ -8,6 +8,8 @@ Sweet Crumbs Bakery is a responsive multi-page bakery website developed using HT
 
 This project was developed as part of the Web Development Part 2 requirements, with a focus on CSS styling, responsive web design, usability, accessibility, interactive functionality and documentation.
 
+Github link - https://github.com/SaneleDlamini77/ST10172088_WEDEPART2_SWEETCRUMBSBAKERY
+
 ---
 
 # Table of Contents
